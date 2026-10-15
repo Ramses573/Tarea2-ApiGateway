@@ -107,6 +107,10 @@ La colección contiene pruebas para:
 - Agregación de información.
 - Inspección de cabeceras del Gateway.
 
+## Video de demostración
+
+[Ver demostración del API Gateway en YouTube](https://youtu.be/CqaZxxMn_1I)
+
 ## Documentación y entregables
 
 - [Investigación sobre API Gateways](docs/Investigacion_API_Gateways_CUC.md)
