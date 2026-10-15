@@ -118,7 +118,6 @@ La colección contiene pruebas para:
 - [Matriz de responsabilidades](docs/Matriz_Responsabilidades.xlsx)
 - [Documento de evidencias](docs/Documento_Evidencias_Pantallazos.docx)
 - [Evidencias en Markdown](docs/Documento_Evidencias_Pantallazos.md)
-- [Guía para el video](docs/Guia_Grabacion_Video_5min.md)
 
 ## Estructura del repositorio
 
