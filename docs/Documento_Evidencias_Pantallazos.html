@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Documento de Evidencias y Pantallazos - Tarea 2 CUC</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 2cm;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      line-height: 1.5;
+      color: #1e293b;
+      background-color: #fff;
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .cover {
+      text-align: center;
+      padding-top: 40px;
+      padding-bottom: 50px;
+      page-break-after: always;
+      border-bottom: 2px solid #003366;
+    }
+    .cover h1 {
+      color: #003366;
+      font-size: 22pt;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .cover h2 {
+      color: #475569;
+      font-size: 14pt;
+      font-weight: 500;
+      margin-bottom: 30px;
+    }
+    .cover .integrantes-box {
+      margin: 25px auto;
+      display: inline-block;
+      text-align: left;
+      background: #f8fafc;
+      padding: 16px 28px;
+      border-radius: 6px;
+      border-left: 4px solid #003366;
+      font-size: 10.5pt;
+      line-height: 1.7;
+    }
+    .cover .meta {
+      margin-top: 25px;
+      font-size: 10.5pt;
+      line-height: 1.8;
+      color: #334155;
+    }
+    h2 {
+      color: #003366;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 6px;
+      font-size: 15pt;
+      margin-top: 35px;
+      margin-bottom: 12px;
+    }
+    h3 {
+      color: #0f172a;
+      font-size: 12pt;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 10pt;
+      color: #334155;
+      margin-bottom: 10px;
+    }
+    /* Estilo Postman Window */
+    .postman-window {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      margin: 15px 0 25px 0;
+      overflow: hidden;
+      page-break-inside: avoid;
+    }
+    .postman-header {
+      background: #f1f5f9;
+      border-bottom: 1px solid #cbd5e1;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 9.5pt;
+      font-family: monospace;
+    }
+    .badge-method {
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 9pt;
+      text-transform: uppercase;
+    }
+    .badge-get { background: #dcfce7; color: #166534; }
+    .badge-post { background: #ffedd5; color: #9a3412; }
+    .badge-put { background: #e0e7ff; color: #3730a3; }
+    .postman-url {
+      color: #0f172a;
+      flex-grow: 1;
+      font-weight: 600;
+    }
+    .badge-status {
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .badge-time {
+      color: #64748b;
+      font-size: 8.5pt;
+    }
+    .postman-body {
+      padding: 12px 14px;
+      background: #fafafa;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 8.5pt;
+      color: #1e293b;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      max-height: 380px;
+    }
+    /* Estilo Terminal Console */
+    .terminal-window {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 8.5pt;
+      line-height: 1.45;
+      margin: 15px 0 25px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      white-space: pre-wrap;
+      overflow-x: auto;
+      page-break-inside: avoid;
+    }
+    .term-gw { color: #38bdf8; font-weight: bold; }
+    .term-prod { color: #4ade80; font-weight: bold; }
+    .term-cli { color: #facc15; font-weight: bold; }
+    .term-ord { color: #f472b6; font-weight: bold; }
+    .term-success { color: #22c55e; }
+    .term-muted { color: #94a3b8; }
+    
+    .desc-box {
+      background: #eff6ff;
+      border-left: 3px solid #3b82f6;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-size: 9.5pt;
+    }
+    @media print {
+      body { padding: 0; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="no-print" style="background:#003366; color:white; padding:12px; text-align:center; margin-bottom:20px; border-radius:6px;">
+  <strong>💡 Tip para Guardar:</strong> Presiona <code>Ctrl + P</code> en Chrome/Edge y selecciona <strong>"Guardar como PDF"</strong> para generar el documento de evidencias con todas las capturas.
+</div>
+
+<div class="cover">
+  <div style="font-size: 14pt; font-weight: bold; color: #003366;">COLEGIO UNIVERSITARIO DE CARTAGO</div>
+  <div style="font-size: 11pt; color: #555;">DEPARTAMENTO DE TECNOLOGÍAS DE LA INFORMACIÓN</div>
+  <div style="font-size: 11pt; color: #555;">CURSO: PROGRAMACIÓN V (COD. P5)</div>
+
+  <h1>Documento de Evidencias Técnicas y Pruebas Funcionales</h1>
+  <h2>Demostración de Microservicios, Persistencia NoSQL, Entrada Única y Políticas de API Gateway</h2>
+
+  <div class="integrantes-box">
+    <strong>Equipo de Trabajo:</strong><br>
+    • Héctor Román Arrieta<br>
+    • Ramsés Aguilar Monge<br>
+    • Alejandro Morales<br>
+    • Fabián Espinoza Méndez<br>
+    • José Rodolfo Morales Calderón
+  </div>
+
+  <div class="meta">
+    <strong>Docente:</strong> Prof. Ing. Gabriel González Solano<br>
+    <strong>Fecha de Entrega:</strong> 15 de Octubre de 2026<br>
+    <strong>Periodo Lectivo:</strong> III Cuatrimestre 2026
+  </div>
+</div>
+
+<h2>EVIDENCIA 1: Servicios en Ejecución Concurrente y Persistencia NoSQL (MongoDB)</h2>
+<div class="desc-box">
+  <strong>Criterio evaluado:</strong> Demostrar que los microservicios corren en puertos independientes (5001, 5002, 5003), con el API Gateway en puerto 8080 y conexión activa a bases de datos NoSQL independientes en MongoDB.
+</div>
+
+<div class="terminal-window">
+<span class="term-muted">> tarea2-api-gateway@1.0.0 dev</span>
+<span class="term-muted">> concurrently --kill-others -n "GATEWAY,PRODUCTOS,CLIENTES,ORDENES" ...</span>
+
+<span class="term-gw">[GATEWAY]</span> ====================================================
+<span class="term-gw">[GATEWAY]</span> <span class="term-success">🚀 CUC-API-Gateway corriendo en http://localhost:8080</span>
+<span class="term-gw">[GATEWAY]</span> 👉 Entrada única para todos los microservicios
+<span class="term-gw">[GATEWAY]</span> - Productos: http://localhost:8080/api/productos
+<span class="term-gw">[GATEWAY]</span> - Clientes:  http://localhost:8080/api/clientes
+<span class="term-gw">[GATEWAY]</span> - Órdenes:   http://localhost:8080/api/ordenes
+<span class="term-gw">[GATEWAY]</span> - Resumen:   http://localhost:8080/api/resumen-orden/:id (Agregación)
+<span class="term-gw">[GATEWAY]</span> - Dashboard: http://localhost:8080/api/dashboard (Agregación)
+<span class="term-gw">[GATEWAY]</span> ====================================================
+<span class="term-prod">[PRODUCTOS]</span> <span class="term-success">[Productos-Service] Conectado exitosamente a MongoDB (mongodb://127.0.0.1:27017/cuc_productos_db)</span>
+<span class="term-prod">[PRODUCTOS]</span> <span class="term-success">[Productos-Service] Microservicio corriendo en http://localhost:5001</span>
+<span class="term-cli">[CLIENTES]</span>  <span class="term-success">[Clientes-Service] Conectado exitosamente a MongoDB (mongodb://127.0.0.1:27017/cuc_clientes_db)</span>
+<span class="term-cli">[CLIENTES]</span>  <span class="term-success">[Clientes-Service] Microservicio corriendo en http://localhost:5002</span>
+<span class="term-ord">[ORDENES]</span>   <span class="term-success">[Ordenes-Service] Conectado exitosamente a MongoDB (mongodb://127.0.0.1:27017/cuc_ordenes_db)</span>
+<span class="term-ord">[ORDENES]</span>   <span class="term-success">[Ordenes-Service] Microservicio corriendo en http://localhost:5003</span>
+</div>
+
+<h2>EVIDENCIA 2: Entrada Única y Enrutamiento Hacia Microservicios</h2>
+<div class="desc-box">
+  <strong>Criterio evaluado:</strong> Las solicitudes del consumidor se dirigen exclusivamente a la URL centralizada <code>http://localhost:8080</code>, y el Gateway las enruta a Productos y Clientes.
+</div>
+
+<h3>A. Health Check del API Gateway</h3>
+<div class="postman-window">
+  <div class="postman-header">
+    <span class="badge-method badge-get">GET</span>
+    <span class="postman-url">http://localhost:8080/health</span>
+    <span class="badge-status">200 OK</span>
+    <span class="badge-time">4 ms</span>
+  </div>
+  <div class="postman-body">{
+  "gateway": "CUC-API-Gateway",
+  "estado": "UP",
+  "puerto": 8080,
+  "timestamp": "2026-10-15T21:28:00.276Z",
+  "serviciosEnrutados": {
+    "productos": "http://localhost:5001",
+    "clientes": "http://localhost:5002",
+    "ordenes": "http://localhost:5003"
+  }
+}</div>
+</div>
+
+<h3>B. Consulta de Catálogo de Productos a través del Gateway</h3>
+<div class="postman-window">
+  <div class="postman-header">
+    <span class="badge-method badge-get">GET</span>
+    <span class="postman-url">http://localhost:8080/api/productos</span>
+    <span class="badge-status">200 OK</span>
+    <span class="badge-time">12 ms</span>
+  </div>
+  <div class="postman-body">{
+  "servicio": "productos-service",
+  "total": 4,
+  "datos": [
+    {
+      "_id": "6ad13dac36456ff8818d4057",
+      "nombre": "Teclado Mecánico Redragon Kumara",
+      "descripcion": "RGB Switch Blue formato TKL compacto",
+      "precio": 45,
+      "stock": 29,
+      "categoria": "Periféricos",
+      "activo": true,
+      "createdAt": "2026-10-15T20:55:08.563Z"
+    },
+    {
+      "_id": "6ad13dac36456ff8818d4056",
+      "nombre": "Laptop ASUS ZenBook 14",
+      "descripcion": "Intel Core i7 16GB RAM 512GB SSD OLED",
+      "precio": 850,
+      "stock": 15,
+      "categoria": "Computadoras",
+      "activo": true
+    }
+  ]
+}</div>
+</div>
+
+<h3>C. Consulta de Clientes Registrados a través del Gateway</h3>
+<div class="postman-window">
+  <div class="postman-header">
+    <span class="badge-method badge-get">GET</span>
+    <span class="postman-url">http://localhost:8080/api/clientes</span>
+    <span class="badge-status">200 OK</span>
+    <span class="badge-time">7 ms</span>
+  </div>
+  <div class="postman-body">{
+  "servicio": "clientes-service",
+  "total": 5,
+  "datos": [
+    {
+      "_id": "6ad13dac36456ff8818d405c",
+      "identificacion": "305550123",
+      "nombre": "Ramsés Aguilar Monge",
+      "correo": "ramses.aguilar@est.cuc.cr",
+      "telefono": "8899-7766",
+      "direccion": "Cartago centro, Costa Rica",
+      "activo": true
+    },
+    {
+      "_id": "6ad13dac36456ff8818d405d",
+      "identificacion": "109990888",
+      "nombre": "José Rodolfo Morales Calderón",
+      "correo": "jose.morales@est.cuc.cr",
+      "telefono": "7011-2233",
+      "direccion": "Tres Ríos, La Unión",
+      "activo": true
+    }
+  ]
+}</div>
+</div>
+
+<h2>EVIDENCIA 3: Comunicación Inter-Servicio (Órdenes -> Clientes y Productos)</h2>
+<div class="desc-box">
+  <strong>Criterio evaluado:</strong> Al crear una orden en el microservicio de órdenes, este realiza llamadas HTTP internas al microservicio de clientes (puerto 5002) para validar que el cliente exista y al microservicio de productos (puerto 5001) para validar inventario y descontar el stock.
+</div>
+
+<div class="postman-window">
+  <div class="postman-header">
+    <span class="badge-method badge-post">POST</span>
+    <span class="postman-url">http://localhost:8080/api/ordenes</span>
+    <span class="badge-status">201 Created</span>
+    <span class="badge-time">38 ms</span>
+  </div>
+  <div class="postman-body"><span style="color:#64748b;">// Solicitud enviada (Request Payload):</span>
+{
+  "clienteId": "6ad13dac36456ff8818d405c",
+  "items": [
+    {
+      "productoId": "6ad13dac36456ff8818d4057",
+      "cantidad": 1
+    }
+  ],
+  "notas": "Orden de prueba del equipo de desarrollo CUC"
+}
+
+<span style="color:#64748b;">// Respuesta recibida (Response Payload):</span>
+{
+  "servicio": "ordenes-service",
+  "mensaje": "Orden creada exitosamente con validación inter-servicio",
+  "interServicios": {
+    "clienteValidado": "Ramsés Aguilar Monge",
+    "productosValidados": 1
+  },
+  "datos": {
+    "_id": "6ad13db2d31eace2d0746b84",
+    "clienteId": "6ad13dac36456ff8818d405c",
+    "items": [
+      {
+        "productoId": "6ad13dac36456ff8818d4057",
+        "nombreProducto": "Teclado Mecánico Redragon Kumara",
+        "cantidad": 1,
+        "precioUnitario": 45,
+        "subtotal": 45
+      }
+    ],
+    "total": 45,
+    "estado": "PENDIENTE",
+    "notas": "Orden de prueba del equipo de desarrollo CUC",
+    "createdAt": "2026-10-15T20:55:14.959Z"
+  }
+}</div>
+</div>
+
+<h2>EVIDENCIA 4: Políticas del Gateway — Agregación de Datos (BFF / API Composition)</h2>
+<div class="desc-box">
+  <strong>Criterio evaluado:</strong> Endpoint <code>/api/resumen-orden/:id</code> donde el Gateway consulta en paralelo Órdenes, Clientes y Productos, fusionando los resultados en una única respuesta estructurada en menos de 10ms.
+</div>
+
+<div class="postman-window">
+  <div class="postman-header">
+    <span class="badge-method badge-get">GET</span>
+    <span class="postman-url">http://localhost:8080/api/resumen-orden/6ad13db2d31eace2d0746b84</span>
+    <span class="badge-status">200 OK</span>
+    <span class="badge-time">8 ms</span>
+  </div>
+  <div class="postman-body">{
+  "politicaGateway": "Agregación / API Composition",
+  "agregadoPor": "CUC-API-Gateway",
+  "tiempoEjecucionMs": 8,
+  "ordenId": "6ad13db2d31eace2d0746b84",
+  "fechaCreacion": "2026-10-15T20:55:14.959Z",
+  "estado": "PENDIENTE",
+  "notas": "Orden de prueba del equipo de desarrollo CUC",
+  "total": 45,
+  "cliente": {
+    "_id": "6ad13dac36456ff8818d405c",
+    "identificacion": "305550123",
+    "nombre": "Ramsés Aguilar Monge",
+    "correo": "ramses.aguilar@est.cuc.cr",
+    "telefono": "8899-7766",
+    "direccion": "Cartago centro, Costa Rica",
+    "activo": true
+  },
+  "items": [
+    {
+      "productoId": "6ad13dac36456ff8818d4057",
+      "nombre": "Teclado Mecánico Redragon Kumara",
+      "descripcion": "RGB Switch Blue formato TKL compacto",
+      "categoria": "Periféricos",
+      "precioUnitario": 45,
+      "cantidad": 1,
+      "subtotal": 45
+    }
+  ],
+  "resumenServicios": {
+    "ordenes": "UP",
+    "clientes": "UP",
+    "productos": "UP"
+  }
+}</div>
+</div>
+
+<h3>Agregación #2: Dashboard Consolidado de los 3 Microservicios</h3>
+<div class="postman-window">
+  <div class="postman-header">
+    <span class="badge-method badge-get">GET</span>
+    <span class="postman-url">http://localhost:8080/api/dashboard</span>
+    <span class="badge-status">200 OK</span>
+    <span class="badge-time">9 ms</span>
+  </div>
+  <div class="postman-body">{
+  "politicaGateway": "Agregación / Dashboard BFF",
+  "tiempoEjecucionMs": 9,
+  "servicios": {
+    "productos": {
+      "estado": "UP",
+      "totalRegistros": 4
+    },
+    "clientes": {
+      "estado": "UP",
+      "totalRegistros": 5
+    },
+    "ordenes": {
+      "estado": "UP",
+      "totalRegistros": 1
+    }
+  }
+}</div>
+</div>
+
+<h2>EVIDENCIA 5: Política de Transformación de Cabeceras (Headers)</h2>
+<div class="desc-box">
+  <strong>Criterio evaluado:</strong> Inyección de cabeceras de trazabilidad perimetral <code>X-Gateway-Processed-By</code>, <code>X-Request-Id</code> y eliminación de firmas internas del servidor.
+</div>
+
+<div class="postman-window">
+  <div class="postman-header">
+    <span class="badge-method badge-get">HEADERS</span>
+    <span class="postman-url">Response Headers inspeccionados en Postman</span>
+    <span class="badge-status">200 OK</span>
+  </div>
+  <div class="postman-body">X-Gateway-Processed-By: CUC-API-Gateway
+X-Request-Id: gw-1792099689077-6892
+x-gateway-routed: true
+Content-Type: application/json; charset=utf-8
+Access-Control-Allow-Origin: *
+Date: Thu, 15 Oct 2026 21:28:09 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5</div>
+</div>
+
+<h2>EVIDENCIA 6: Observabilidad Centralizada y Logs con Tiempos de Respuesta</h2>
+<div class="desc-box">
+  <strong>Criterio evaluado:</strong> Registro en consola de la recepción <code>[IN]</code> y respuesta <code>[OUT]</code> en el Gateway y cada microservicio con identificación de transacción y tiempo en milisegundos.
+</div>
+
+<div class="terminal-window">
+<span class="term-gw">[GATEWAY]   [CUC-API-Gateway]  [2026-10-15T21:28:09.077Z] [IN]  GET /api/resumen-orden/6ad13db2d31eace2d0746b84 | ReqId: gw-1792099689077-6892</span>
+<span class="term-ord">[ORDENES]   [Ordenes-Service]  [2026-10-15T21:28:09.078Z] [IN]  GET /ordenes/6ad13db2d31eace2d0746b84 | ReqId: gw-1792099689077-6892 | Gateway: CUC-API-Gateway</span>
+<span class="term-ord">[ORDENES]   [Ordenes-Service]  [2026-10-15T21:28:09.081Z] [OUT] GET /ordenes/6ad13db2d31eace2d0746b84 | Status: 200 | Tiempo: 3ms</span>
+<span class="term-cli">[CLIENTES]  [Clientes-Service] [2026-10-15T21:28:09.083Z] [IN]  GET /clientes/6ad13dac36456ff8818d405c | Gateway: CUC-API-Gateway</span>
+<span class="term-prod">[PRODUCTOS] [Productos-Service] [2026-10-15T21:28:09.083Z] [IN]  GET /productos/6ad13dac36456ff8818d4057 | Gateway: CUC-API-Gateway</span>
+<span class="term-cli">[CLIENTES]  [Clientes-Service] [2026-10-15T21:28:09.085Z] [OUT] GET /clientes/6ad13dac36456ff8818d405c | Status: 200 | Tiempo: 2ms</span>
+<span class="term-prod">[PRODUCTOS] [Productos-Service] [2026-10-15T21:28:09.085Z] [OUT] GET /productos/6ad13dac36456ff8818d4057 | Status: 200 | Tiempo: 2ms</span>
+<span class="term-gw">[GATEWAY]   [CUC-API-Gateway]  [2026-10-15T21:28:09.085Z] [OUT] GET /api/resumen-orden/6ad13db2d31eace2d0746b84 -> HTTP 200 (8ms)</span>
+</div>
+
+</body>
+</html>
