@@ -182,7 +182,33 @@
               "host": ["{{base_url}}"],
               "path": ["api", "productos", "{{tarea2_producto_id}}"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const baseUrl = pm.variables.get('base_url');",
+                  "pm.sendRequest(`${baseUrl}/api/productos`, (error, response) => {",
+                  "  if (error) throw error;",
+                  "  const productos = response.json().datos;",
+                  "  if (!productos || productos.length === 0) throw new Error('No hay productos. Ejecute npm run seed.');",
+                  "  pm.collectionVariables.set('tarea2_producto_id', productos[0]._id);",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Producto actualizado', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -225,7 +251,33 @@
               "host": ["{{base_url}}"],
               "path": ["api", "clientes", "{{tarea2_cliente_id}}"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const baseUrl = pm.variables.get('base_url');",
+                  "pm.sendRequest(`${baseUrl}/api/clientes`, (error, response) => {",
+                  "  if (error) throw error;",
+                  "  const clientes = response.json().datos;",
+                  "  if (!clientes || clientes.length === 0) throw new Error('No hay clientes. Ejecute npm run seed.');",
+                  "  pm.collectionVariables.set('tarea2_cliente_id', clientes[0]._id);",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Cliente encontrado', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Registrar nuevo cliente",
@@ -276,7 +328,22 @@
               "host": ["{{base_url}}"],
               "path": ["api", "ordenes"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Respuesta exitosa', () => pm.response.to.have.status(200));",
+                  "const respuesta = pm.response.json();",
+                  "if (respuesta.datos && respuesta.datos.length > 0) {",
+                  "  pm.collectionVariables.set('tarea2_orden_id', respuesta.datos[0]._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Crear orden (Validación Inter-servicio con Clientes y Productos)",
@@ -300,6 +367,27 @@
             "description": "Demuestra la comunicación inter-servicio: el servicio de órdenes valida cliente en clientes-service y descuenta stock en productos-service."
           },
           "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const baseUrl = pm.variables.get('base_url');",
+                  "pm.sendRequest(`${baseUrl}/api/productos`, (error, response) => {",
+                  "  if (error) throw error;",
+                  "  const productos = response.json().datos;",
+                  "  if (!productos || productos.length === 0) throw new Error('No hay productos. Ejecute npm run seed.');",
+                  "  pm.collectionVariables.set('tarea2_producto_id', productos[0]._id);",
+                  "});",
+                  "pm.sendRequest(`${baseUrl}/api/clientes`, (error, response) => {",
+                  "  if (error) throw error;",
+                  "  const clientes = response.json().datos;",
+                  "  if (!clientes || clientes.length === 0) throw new Error('No hay clientes. Ejecute npm run seed.');",
+                  "  pm.collectionVariables.set('tarea2_cliente_id', clientes[0]._id);",
+                  "});"
+                ]
+              }
+            },
             {
               "listen": "test",
               "script": {
@@ -332,7 +420,33 @@
               "host": ["{{base_url}}"],
               "path": ["api", "ordenes", "{{tarea2_orden_id}}", "estado"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const baseUrl = pm.variables.get('base_url');",
+                  "pm.sendRequest(`${baseUrl}/api/ordenes`, (error, response) => {",
+                  "  if (error) throw error;",
+                  "  const ordenes = response.json().datos;",
+                  "  if (!ordenes || ordenes.length === 0) throw new Error('No hay órdenes. Ejecute primero Crear orden.');",
+                  "  pm.collectionVariables.set('tarea2_orden_id', ordenes[0]._id);",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Orden actualizada', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -350,7 +464,33 @@
               "path": ["api", "resumen-orden", "{{tarea2_orden_id}}"]
             },
             "description": "Endpoint clave del Gateway. Combina en una sola respuesta la Orden, el Cliente completo y el detalle de cada Producto con tiempos de ejecución."
-          }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const baseUrl = pm.variables.get('base_url');",
+                  "pm.sendRequest(`${baseUrl}/api/ordenes`, (error, response) => {",
+                  "  if (error) throw error;",
+                  "  const ordenes = response.json().datos;",
+                  "  if (!ordenes || ordenes.length === 0) throw new Error('No hay órdenes. Ejecute primero Crear orden.');",
+                  "  pm.collectionVariables.set('tarea2_orden_id', ordenes[0]._id);",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Resumen generado', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
         }
       ]
     }
