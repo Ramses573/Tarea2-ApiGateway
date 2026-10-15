@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tarea Corta 2 - Investigación API Gateways - CUC</title>
+  <title>Tarea Corta 2 - Investigación API Gateways y Microservicios - CUC</title>
   <style>
     @page {
       size: A4;
@@ -19,42 +19,54 @@
     }
     .cover {
       text-align: center;
-      padding-top: 60px;
-      padding-bottom: 80px;
+      padding-top: 50px;
+      padding-bottom: 70px;
       page-break-after: always;
       border-bottom: 2px solid #003366;
     }
     .cover h1 {
       color: #003366;
-      font-size: 26pt;
-      margin-top: 40px;
+      font-size: 24pt;
+      margin-top: 35px;
       margin-bottom: 10px;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
     .cover h2 {
       color: #444;
-      font-size: 16pt;
+      font-size: 15pt;
       font-weight: 500;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
+    }
+    .cover .integrantes-box {
+      margin: 30px auto;
+      display: inline-block;
+      text-align: left;
+      background: #f8f9fa;
+      padding: 18px 30px;
+      border-radius: 6px;
+      border-left: 4px solid #003366;
+      font-size: 11pt;
+      line-height: 1.8;
     }
     .cover .meta {
-      margin-top: 60px;
-      font-size: 12pt;
-      line-height: 2;
+      margin-top: 35px;
+      font-size: 11pt;
+      line-height: 1.9;
     }
     h2, h3, h4 {
       color: #003366;
-      margin-top: 30px;
+      margin-top: 28px;
       margin-bottom: 12px;
     }
     h2 {
       border-bottom: 1.5px solid #003366;
       padding-bottom: 6px;
-      font-size: 18pt;
+      font-size: 17pt;
+      page-break-before: auto;
     }
     h3 {
-      font-size: 14pt;
+      font-size: 13pt;
     }
     p, li {
       font-size: 11pt;
@@ -64,11 +76,11 @@
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
-      font-size: 10pt;
+      font-size: 9.5pt;
     }
     th, td {
       border: 1px solid #ccc;
-      padding: 10px;
+      padding: 9px;
       text-align: left;
     }
     th {
@@ -98,15 +110,19 @@
       .no-print {
         display: none;
       }
+      .page-break {
+        page-break-after: always;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="no-print" style="background:#003366; color:white; padding:12px; text-align:center; margin-bottom:20px; border-radius:4px;">
-  <strong>💡 Tip para entrega:</strong> Presiona <code>Ctrl + P</code> en tu navegador (Chrome o Edge) y selecciona <em>"Guardar como PDF"</em> para obtener el documento formal solicitado en la tarea.
+<div class="no-print" style="background:#003366; color:white; padding:14px; text-align:center; margin-bottom:20px; border-radius:6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+  <strong>📄 Instrucción para Guardar como PDF:</strong> Presiona en tu teclado <code>Ctrl + P</code> (o clic derecho > Imprimir), selecciona la impresora <strong>"Guardar como PDF"</strong>, tamaño <strong>A4</strong>, márgenes predeterminados y guarda tu archivo formal.
 </div>
 
+<!-- PORTADA OFICIAL -->
 <div class="cover">
   <div style="font-size: 15pt; font-weight: bold; color: #003366;">COLEGIO UNIVERSITARIO DE CARTAGO</div>
   <div style="font-size: 12pt; color: #555;">DEPARTAMENTO DE TECNOLOGÍAS DE LA INFORMACIÓN</div>
@@ -115,9 +131,17 @@
   <h1>Tarea Corta 2<br>Investigación Arquitectura de API Gateways y Microservicios</h1>
   <h2>Diseño, Patrones, Resiliencia y Evaluación Comparativa</h2>
 
+  <div class="integrantes-box">
+    <strong>Integrantes del Equipo de Trabajo:</strong><br>
+    • Héctor Román Arrieta<br>
+    • Ramsés Aguilar Monge<br>
+    • Alejandro Morales<br>
+    • Fabián Espinoza Méndez<br>
+    • José Rodolfo Morales Calderón
+  </div>
+
   <div class="meta">
-    <strong>Profesor:</strong> Prof. Ing. Gabriel González Solano<br>
-    <strong>Estudiante:</strong> Ramses Solano<br>
+    <strong>Docente:</strong> Prof. Ing. Gabriel González Solano<br>
     <strong>Fecha de Entrega:</strong> 15 de Octubre de 2026<br>
     <strong>Periodo Lectivo:</strong> III Cuatrimestre 2026
   </div>
@@ -288,6 +312,65 @@ Uno de los equívocos más frecuentes en ingeniería de software consiste en equ
 <p>
 <strong>Cuándo evitarlo:</strong> En sistemas monolíticos consolidados, arquitecturas con 1 o 2 microservicios triviales donde la sobrecarga de mantenimiento supera los beneficios, o en sistemas con tolerancia cero a la latencia de red (como procesamiento de transacciones financieras de alta frecuencia - HFT).
 </p>
+
+<h2>8. Matriz de Responsabilidades y División de Trabajo del Equipo</h2>
+<p>
+De acuerdo con los lineamientos de la rúbrica del curso, a continuación se detalla la asignación de responsabilidades y el porcentaje de participación individual en el diseño, desarrollo, pruebas y documentación:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Miembro del Equipo</th>
+      <th>Rol Principal</th>
+      <th>Módulo Asignado</th>
+      <th>% Part.</th>
+      <th>Entregables Concretos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Ramsés Aguilar Monge</strong></td>
+      <td>Líder Técnico & Arquitectura</td>
+      <td>API Gateway Centralizado y Enrutamiento</td>
+      <td>20%</td>
+      <td>Diseño del Gateway en puerto 8080, middleware de enrutamiento perimetral, transformación de cabeceras (<code>X-Gateway</code>, <code>X-Request-Id</code>) y logging de observabilidad.</td>
+    </tr>
+    <tr>
+      <td><strong>José Rodolfo Morales Calderón</strong></td>
+      <td>Backend & Integración</td>
+      <td>Política de Agregación y Pruebas Postman</td>
+      <td>20%</td>
+      <td>Implementación del endpoint de agregación BFF (<code>/api/resumen-orden/:id</code>), agregación de dashboard general (<code>/api/dashboard</code>) y suite completa en Postman v2.1.</td>
+    </tr>
+    <tr>
+      <td><strong>Fabián Espinoza Méndez</strong></td>
+      <td>Backend Developer</td>
+      <td>Microservicio de Órdenes e Inter-Servicio</td>
+      <td>20%</td>
+      <td>API REST en puerto 5003, modelo NoSQL en MongoDB (<code>cuc_ordenes_db</code>), comunicación inter-servicio con Productos y Clientes para validación de stock y precios.</td>
+    </tr>
+    <tr>
+      <td><strong>Héctor Román Arrieta</strong></td>
+      <td>Backend Developer</td>
+      <td>Microservicio de Productos / Catálogo</td>
+      <td>20%</td>
+      <td>API REST en puerto 5001, modelo NoSQL en MongoDB (<code>cuc_productos_db</code>), endpoints CRUD, lógica de inventario y endpoint de descuento de stock.</td>
+    </tr>
+    <tr>
+      <td><strong>Alejandro Morales</strong></td>
+      <td>Backend & Documentación</td>
+      <td>Microservicio de Clientes e Investigación Teórica</td>
+      <td>20%</td>
+      <td>API REST en puerto 5002, modelo NoSQL en MongoDB (<code>cuc_clientes_db</code>), script de seed de datos y redacción formal del informe teórico en formato APA.</td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: right; font-weight: bold;">TOTAL PARTICIPACIÓN DEL EQUIPO:</td>
+      <td style="font-weight: bold;">100%</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 class="references-title">Referencias Bibliográficas (APA 7ª Edición)</h2>
 <div class="references">

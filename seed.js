@@ -74,26 +74,42 @@ async function seed() {
   const clientes = await Cliente.insertMany([
     {
       identificacion: '305550123',
-      nombre: 'Ramses Solano',
-      correo: 'ramses.solano@est.cuc.ac.cr',
+      nombre: 'Ramsés Aguilar Monge',
+      correo: 'ramses.aguilar@est.cuc.cr',
       telefono: '8899-7766',
       direccion: 'Cartago centro, Costa Rica',
       activo: true
     },
     {
-      identificacion: '102340567',
-      nombre: 'Valeria Castro',
-      correo: 'valeria.castro@correo.com',
+      identificacion: '109990888',
+      nombre: 'José Rodolfo Morales Calderón',
+      correo: 'jose.morales@est.cuc.cr',
       telefono: '7011-2233',
       direccion: 'Tres Ríos, La Unión',
       activo: true
     },
     {
-      identificacion: '209870654',
-      nombre: 'Daniel Mora',
-      correo: 'daniel.mora@correo.com',
+      identificacion: '207770666',
+      nombre: 'Héctor Román Arrieta',
+      correo: 'hector.roman@est.cuc.cr',
       telefono: '6044-5566',
       direccion: 'Curridabat, San José',
+      activo: true
+    },
+    {
+      identificacion: '304440333',
+      nombre: 'Fabián Espinoza Méndez',
+      correo: 'fabian.espinoza@est.cuc.cr',
+      telefono: '8765-4321',
+      direccion: 'Paraíso, Cartago',
+      activo: true
+    },
+    {
+      identificacion: '108880777',
+      nombre: 'Alejandro Morales',
+      correo: 'alejandro.morales@est.cuc.cr',
+      telefono: '8912-3456',
+      direccion: 'Oreamuno, Cartago',
       activo: true
     }
   ]);

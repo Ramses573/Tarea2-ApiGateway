@@ -3,7 +3,12 @@
 **Curso:** Programación V  
 **Institución:** Colegio Universitario de Cartago (CUC)  
 **Profesor:** Prof. Ing. Gabriel González Solano  
-**Estudiante:** Ramses Solano  
+**Integrantes del Equipo:**  
+- Héctor Román Arrieta  
+- Ramsés Aguilar Monge  
+- Alejandro Morales  
+- Fabián Espinoza Méndez  
+- José Rodolfo Morales Calderón  
 **Fecha:** Octubre 2026  
 
 ---

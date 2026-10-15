@@ -7,7 +7,12 @@
 # TAREA CORTA 2: INVESTIGACIÓN ARQUITECTURA DE API GATEWAYS Y MICROSERVICIOS
 
 **Profesor:** Prof. Ing. Gabriel González Solano  
-**Estudiante:** Ramses Solano  
+**Integrantes del Equipo:**  
+- Héctor Román Arrieta  
+- Ramsés Aguilar Monge  
+- Alejandro Morales  
+- Fabián Espinoza Méndez  
+- José Rodolfo Morales Calderón  
 **Fecha de Entrega:** 15 de Octubre de 2026  
 **Periodo Académico:** III Cuatrimestre 2026  
 
@@ -193,6 +198,21 @@ El diseño arquitectónico no consiste en aplicar patrones por moda, sino en jus
 2. **Sistemas con solo 1 o 2 microservicios triviales:** Si la sobrecarga de mantenimiento del Gateway supera los beneficios del desacoplamiento, es preferible la comunicación directa o un proxy elemental.
 3. **Escenarios de Extrema Sensibilidad a la Latencia en Tiempo Real (HFT - High Frequency Trading, procesamiento de telemetría IoT de microsegundos):** Si cada milisegundo es crítico para el negocio, el salto de red adicional (*hop*) impuesto por el Gateway puede resultar inaceptable; en tales casos se prefiere Service Mesh interno directo.
 4. **Equipos de desarrollo pequeños sin experiencia en sistemas distribuidos:** Si el equipo no cuenta con la madurez para monitorear y mitigar el riesgo de *Single Point of Failure* mediante clústeres de alta disponibilidad.
+
+---
+
+## 8. MATRIZ DE RESPONSABILIDADES Y DIVISIÓN DE TRABAJO DEL EQUIPO
+
+De acuerdo con los lineamientos de la rúbrica del curso, a continuación se detalla la asignación de responsabilidades y el porcentaje de participación individual en el diseño, desarrollo, pruebas y documentación:
+
+| Miembro del Equipo | Rol Principal | Módulo Asignado | % Part. | Entregables Concretos |
+|---|---|---|:---:|---|
+| **Ramsés Aguilar Monge** | Líder Técnico & Arquitectura | API Gateway Centralizado y Enrutamiento | **20%** | Diseño del Gateway en puerto 8080, middleware de enrutamiento perimetral, transformación de cabeceras (`X-Gateway`, `X-Request-Id`) y logging de observabilidad. |
+| **José Rodolfo Morales Calderón** | Backend & Integración | Política de Agregación y Pruebas Postman | **20%** | Implementación del endpoint de agregación BFF (`/api/resumen-orden/:id`), agregación de dashboard general (`/api/dashboard`) y suite completa en Postman v2.1. |
+| **Fabián Espinoza Méndez** | Backend Developer | Microservicio de Órdenes e Inter-Servicio | **20%** | API REST en puerto 5003, modelo NoSQL en MongoDB (`cuc_ordenes_db`), comunicación inter-servicio con Productos y Clientes para validación de stock y precios. |
+| **Héctor Román Arrieta** | Backend Developer | Microservicio de Productos / Catálogo | **20%** | API REST en puerto 5001, modelo NoSQL en MongoDB (`cuc_productos_db`), endpoints CRUD, lógica de inventario y endpoint de descuento de stock. |
+| **Alejandro Morales** | Backend & Documentación | Microservicio de Clientes e Investigación Teórica | **20%** | API REST en puerto 5002, modelo NoSQL en MongoDB (`cuc_clientes_db`), script de seed de datos y redacción formal del informe teórico en formato APA. |
+| **TOTAL PARTICIPACIÓN** | | | **100%** | |
 
 ---
 

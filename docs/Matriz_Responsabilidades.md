@@ -1,0 +1,20 @@
+# MATRIZ DE RESPONSABILIDADES Y PARTICIPACIÓN DEL EQUIPO
+## Tarea Corta 2: Arquitectura de Microservicios y API Gateway - CUC
+
+**Curso:** Programación V  
+**Docente:** Prof. Ing. Gabriel González Solano  
+**Fecha de Entrega:** 15 de Octubre de 2026  
+**Institución:** Colegio Universitario de Cartago  
+
+---
+
+### Resumen de Distribución de Carga
+
+| Miembro del Equipo | Rol Principal | Módulo / Tarea Asignada | % Part. | Entregables Concretos |
+|---|---|---|:---:|---|
+| **Ramsés Aguilar Monge** | Líder Técnico & Arquitectura | API Gateway Centralizado y Enrutamiento | **20%** | Diseño del Gateway en puerto 8080, middleware de enrutamiento perimetral, política de transformación de cabeceras (`X-Gateway`, `X-Request-Id`), observabilidad y logging de tráfico. |
+| **José Rodolfo Morales Calderón** | Backend & Integración | Política de Agregación y Pruebas Postman | **20%** | Endpoint de agregación BFF (`/api/resumen-orden/:id`), agregación de dashboard general (`/api/dashboard`) y diseño de la colección completa de pruebas en Postman v2.1. |
+| **Fabián Espinoza Méndez** | Backend Developer | Microservicio de Órdenes y Comunicación Inter-Servicio | **20%** | Desarrollo de API REST en puerto 5003, modelo NoSQL en MongoDB (`cuc_ordenes_db`), comunicación inter-servicio con Productos y Clientes para validación de stock y precios. |
+| **Héctor Román Arrieta** | Backend Developer | Microservicio de Productos / Catálogo | **20%** | Desarrollo de API REST en puerto 5001, modelo NoSQL en MongoDB (`cuc_productos_db`), endpoints CRUD, lógica de validación de stock y endpoint de descuento de inventario. |
+| **Alejandro Morales** | Backend & Documentación | Microservicio de Clientes e Investigación Teórica | **20%** | Desarrollo de API REST en puerto 5002, modelo NoSQL en MongoDB (`cuc_clientes_db`), scripts de seed de datos y redacción formal del documento de investigación teórica en formato APA. |
+| **TOTAL** | | | **100%** | |

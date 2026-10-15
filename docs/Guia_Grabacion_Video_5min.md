@@ -17,7 +17,7 @@ Cumplir con el requerimiento de evidencias de funcionamiento exigido en la pauta
 ### Minuto 0:00 a 0:45 | Introducción y Explicación de la Arquitectura
 * **Qué mostrar en pantalla:** Abre el archivo `README.md` o el diagrama de arquitectura en VS Code.
 * **Qué decir:**
-  > *"Saludos profesor. Mi nombre es Ramses Solano y esta es la presentación práctica de la Tarea Corta 2 de Programación V sobre API Gateways y Microservicios.*  
+  > *"Saludos profesor. Mi nombre es Ramsés Aguilar Monge, y en representación de nuestro equipo de trabajo conformado por Héctor Román Arrieta, Alejandro Morales, Fabián Espinoza Méndez, José Rodolfo Morales Calderón y mi persona, presentamos la demostración práctica de la Tarea Corta 2 de Programación V sobre API Gateways y Microservicios.*  
   > *Nuestra arquitectura consta de 3 microservicios independientes:*
   > *1. Microservicio de Productos corriendo en el puerto 5001 con su propia base de datos MongoDB `cuc_productos_db`.*
   > *2. Microservicio de Clientes en el puerto 5002 con base de datos `cuc_clientes_db`.*
