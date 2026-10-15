@@ -12,19 +12,19 @@
       "type": "string"
     },
     {
-      "key": "producto_id",
+      "key": "tarea2_producto_id",
       "value": "",
       "description": "Se asigna automáticamente al listar o crear productos.",
       "type": "string"
     },
     {
-      "key": "cliente_id",
+      "key": "tarea2_cliente_id",
       "value": "",
       "description": "Se asigna automáticamente al listar o crear clientes.",
       "type": "string"
     },
     {
-      "key": "orden_id",
+      "key": "tarea2_orden_id",
       "value": "",
       "description": "Se asigna automáticamente al crear una orden.",
       "type": "string"
@@ -85,7 +85,7 @@
                   "pm.test('Respuesta exitosa', () => pm.response.to.have.status(200));",
                   "const respuesta = pm.response.json();",
                   "pm.expect(respuesta.datos).to.be.an('array').that.is.not.empty;",
-                  "pm.collectionVariables.set('producto_id', respuesta.datos[0]._id);"
+                  "pm.collectionVariables.set('tarea2_producto_id', respuesta.datos[0]._id);"
                 ]
               }
             }
@@ -97,11 +97,37 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/productos/{{producto_id}}",
+              "raw": "{{base_url}}/api/productos/{{tarea2_producto_id}}",
               "host": ["{{base_url}}"],
-              "path": ["api", "productos", "{{producto_id}}"]
+              "path": ["api", "productos", "{{tarea2_producto_id}}"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const baseUrl = pm.variables.get('base_url');",
+                  "pm.sendRequest(`${baseUrl}/api/productos`, (error, response) => {",
+                  "  if (error) throw error;",
+                  "  const productos = response.json().datos;",
+                  "  if (!productos || productos.length === 0) throw new Error('No hay productos. Ejecute npm run seed.');",
+                  "  pm.collectionVariables.set('tarea2_producto_id', productos[0]._id);",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Producto encontrado', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Crear nuevo producto",
@@ -131,7 +157,7 @@
                 "exec": [
                   "pm.test('Producto creado', () => pm.response.to.have.status(201));",
                   "const respuesta = pm.response.json();",
-                  "pm.collectionVariables.set('producto_id', respuesta.datos._id);"
+                  "pm.collectionVariables.set('tarea2_producto_id', respuesta.datos._id);"
                 ]
               }
             }
@@ -152,9 +178,9 @@
               "raw": "{\n  \"precio\": 320,\n  \"stock\": 10\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/productos/{{producto_id}}",
+              "raw": "{{base_url}}/api/productos/{{tarea2_producto_id}}",
               "host": ["{{base_url}}"],
-              "path": ["api", "productos", "{{producto_id}}"]
+              "path": ["api", "productos", "{{tarea2_producto_id}}"]
             }
           }
         }
@@ -183,7 +209,7 @@
                   "pm.test('Respuesta exitosa', () => pm.response.to.have.status(200));",
                   "const respuesta = pm.response.json();",
                   "pm.expect(respuesta.datos).to.be.an('array').that.is.not.empty;",
-                  "pm.collectionVariables.set('cliente_id', respuesta.datos[0]._id);"
+                  "pm.collectionVariables.set('tarea2_cliente_id', respuesta.datos[0]._id);"
                 ]
               }
             }
@@ -195,9 +221,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/clientes/{{cliente_id}}",
+              "raw": "{{base_url}}/api/clientes/{{tarea2_cliente_id}}",
               "host": ["{{base_url}}"],
-              "path": ["api", "clientes", "{{cliente_id}}"]
+              "path": ["api", "clientes", "{{tarea2_cliente_id}}"]
             }
           }
         },
@@ -229,7 +255,7 @@
                 "exec": [
                   "pm.test('Cliente creado', () => pm.response.to.have.status(201));",
                   "const respuesta = pm.response.json();",
-                  "pm.collectionVariables.set('cliente_id', respuesta.datos._id);"
+                  "pm.collectionVariables.set('tarea2_cliente_id', respuesta.datos._id);"
                 ]
               }
             }
@@ -264,7 +290,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"clienteId\": \"{{cliente_id}}\",\n  \"items\": [\n    {\n      \"productoId\": \"{{producto_id}}\",\n      \"cantidad\": 1\n    }\n  ],\n  \"notas\": \"Pedido generado para prueba de microservicios CUC\"\n}"
+              "raw": "{\n  \"clienteId\": \"{{tarea2_cliente_id}}\",\n  \"items\": [\n    {\n      \"productoId\": \"{{tarea2_producto_id}}\",\n      \"cantidad\": 1\n    }\n  ],\n  \"notas\": \"Pedido generado para prueba de microservicios CUC\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/api/ordenes",
@@ -281,7 +307,7 @@
                 "exec": [
                   "pm.test('Orden creada', () => pm.response.to.have.status(201));",
                   "const respuesta = pm.response.json();",
-                  "pm.collectionVariables.set('orden_id', respuesta.datos._id);"
+                  "pm.collectionVariables.set('tarea2_orden_id', respuesta.datos._id);"
                 ]
               }
             }
@@ -302,9 +328,9 @@
               "raw": "{\n  \"estado\": \"PAGADA\"\n}"
             },
             "url": {
-              "raw": "{{base_url}}/api/ordenes/{{orden_id}}/estado",
+              "raw": "{{base_url}}/api/ordenes/{{tarea2_orden_id}}/estado",
               "host": ["{{base_url}}"],
-              "path": ["api", "ordenes", "{{orden_id}}", "estado"]
+              "path": ["api", "ordenes", "{{tarea2_orden_id}}", "estado"]
             }
           }
         }
@@ -319,9 +345,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{base_url}}/api/resumen-orden/{{orden_id}}",
+              "raw": "{{base_url}}/api/resumen-orden/{{tarea2_orden_id}}",
               "host": ["{{base_url}}"],
-              "path": ["api", "resumen-orden", "{{orden_id}}"]
+              "path": ["api", "resumen-orden", "{{tarea2_orden_id}}"]
             },
             "description": "Endpoint clave del Gateway. Combina en una sola respuesta la Orden, el Cliente completo y el detalle de cada Producto con tiempos de ejecución."
           }
