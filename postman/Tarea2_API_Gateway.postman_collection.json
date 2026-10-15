@@ -13,17 +13,20 @@
     },
     {
       "key": "producto_id",
-      "value": "6ad13dac36456ff8818d4057",
+      "value": "",
+      "description": "Se asigna automáticamente al listar o crear productos.",
       "type": "string"
     },
     {
       "key": "cliente_id",
-      "value": "6ad13dac36456ff8818d405c",
+      "value": "",
+      "description": "Se asigna automáticamente al listar o crear clientes.",
       "type": "string"
     },
     {
       "key": "orden_id",
-      "value": "6ad13db2d31eace2d0746b84",
+      "value": "",
+      "description": "Se asigna automáticamente al crear una orden.",
       "type": "string"
     }
   ],
@@ -72,7 +75,21 @@
               "host": ["{{base_url}}"],
               "path": ["api", "productos"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Respuesta exitosa', () => pm.response.to.have.status(200));",
+                  "const respuesta = pm.response.json();",
+                  "pm.expect(respuesta.datos).to.be.an('array').that.is.not.empty;",
+                  "pm.collectionVariables.set('producto_id', respuesta.datos[0]._id);"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Obtener producto por ID",
@@ -105,7 +122,20 @@
               "host": ["{{base_url}}"],
               "path": ["api", "productos"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Producto creado', () => pm.response.to.have.status(201));",
+                  "const respuesta = pm.response.json();",
+                  "pm.collectionVariables.set('producto_id', respuesta.datos._id);"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Actualizar producto",
@@ -143,7 +173,21 @@
               "host": ["{{base_url}}"],
               "path": ["api", "clientes"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Respuesta exitosa', () => pm.response.to.have.status(200));",
+                  "const respuesta = pm.response.json();",
+                  "pm.expect(respuesta.datos).to.be.an('array').that.is.not.empty;",
+                  "pm.collectionVariables.set('cliente_id', respuesta.datos[0]._id);"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Obtener cliente por ID",
@@ -169,14 +213,27 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"identificacion\": \"118880999\",\n  \"nombre\": \"Alejandro Vargas\",\n  \"correo\": \"alejandro.vargas@cuc.cr\",\n  \"telefono\": \"8765-4321\",\n  \"direccion\": \"San Rafael de Oreamuno\"\n}"
+              "raw": "{\n  \"identificacion\": \"POSTMAN-{{$timestamp}}\",\n  \"nombre\": \"Cliente de prueba Postman\",\n  \"correo\": \"postman.{{$timestamp}}@cuc.cr\",\n  \"telefono\": \"8765-4321\",\n  \"direccion\": \"Cartago, Costa Rica\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/api/clientes",
               "host": ["{{base_url}}"],
               "path": ["api", "clientes"]
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Cliente creado', () => pm.response.to.have.status(201));",
+                  "const respuesta = pm.response.json();",
+                  "pm.collectionVariables.set('cliente_id', respuesta.datos._id);"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -215,7 +272,20 @@
               "path": ["api", "ordenes"]
             },
             "description": "Demuestra la comunicación inter-servicio: el servicio de órdenes valida cliente en clientes-service y descuenta stock en productos-service."
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Orden creada', () => pm.response.to.have.status(201));",
+                  "const respuesta = pm.response.json();",
+                  "pm.collectionVariables.set('orden_id', respuesta.datos._id);"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Actualizar estado de orden",
