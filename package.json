@@ -25,6 +25,8 @@
   "license": "ISC",
   "dependencies": {
     "concurrently": "^9.1.2",
-    "mongoose": "^8.9.5"
+    "exceljs": "^4.4.0",
+    "mongoose": "^8.9.5",
+    "xlsx": "^0.18.5"
   }
 }
