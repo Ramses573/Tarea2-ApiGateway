@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tarea Corta 2 - Investigación API Gateways - CUC</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 2.5cm;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      line-height: 1.6;
+      color: #222;
+      background-color: #fff;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .cover {
+      text-align: center;
+      padding-top: 60px;
+      padding-bottom: 80px;
+      page-break-after: always;
+      border-bottom: 2px solid #003366;
+    }
+    .cover h1 {
+      color: #003366;
+      font-size: 26pt;
+      margin-top: 40px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .cover h2 {
+      color: #444;
+      font-size: 16pt;
+      font-weight: 500;
+      margin-bottom: 40px;
+    }
+    .cover .meta {
+      margin-top: 60px;
+      font-size: 12pt;
+      line-height: 2;
+    }
+    h2, h3, h4 {
+      color: #003366;
+      margin-top: 30px;
+      margin-bottom: 12px;
+    }
+    h2 {
+      border-bottom: 1.5px solid #003366;
+      padding-bottom: 6px;
+      font-size: 18pt;
+    }
+    h3 {
+      font-size: 14pt;
+    }
+    p, li {
+      font-size: 11pt;
+      text-align: justify;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 10pt;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #003366;
+      color: white;
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    .references p {
+      padding-left: 2em;
+      text-indent: -2em;
+      margin-bottom: 12px;
+    }
+    .callout {
+      background: #eef4fa;
+      border-left: 4px solid #003366;
+      padding: 12px 16px;
+      margin: 15px 0;
+      font-size: 10.5pt;
+    }
+    @media print {
+      body {
+        padding: 0;
+      }
+      .no-print {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="no-print" style="background:#003366; color:white; padding:12px; text-align:center; margin-bottom:20px; border-radius:4px;">
+  <strong>💡 Tip para entrega:</strong> Presiona <code>Ctrl + P</code> en tu navegador (Chrome o Edge) y selecciona <em>"Guardar como PDF"</em> para obtener el documento formal solicitado en la tarea.
+</div>
+
+<div class="cover">
+  <div style="font-size: 15pt; font-weight: bold; color: #003366;">COLEGIO UNIVERSITARIO DE CARTAGO</div>
+  <div style="font-size: 12pt; color: #555;">DEPARTAMENTO DE TECNOLOGÍAS DE LA INFORMACIÓN</div>
+  <div style="font-size: 12pt; color: #555;">CURSO: PROGRAMACIÓN V (COD. P5)</div>
+
+  <h1>Tarea Corta 2<br>Investigación Arquitectura de API Gateways y Microservicios</h1>
+  <h2>Diseño, Patrones, Resiliencia y Evaluación Comparativa</h2>
+
+  <div class="meta">
+    <strong>Profesor:</strong> Prof. Ing. Gabriel González Solano<br>
+    <strong>Estudiante:</strong> Ramses Solano<br>
+    <strong>Fecha de Entrega:</strong> 15 de Octubre de 2026<br>
+    <strong>Periodo Lectivo:</strong> III Cuatrimestre 2026
+  </div>
+</div>
+
+<h2>Introducción</h2>
+<p>
+En la evolución del desarrollo de software empresarial, la transición desde arquitecturas monolíticas centralizadas hacia sistemas distribuidos basados en microservicios ha permitido a las organizaciones alcanzar altos niveles de escalabilidad horizontal, despliegues continuos independientes y desacoplamiento de dominios comerciales (Newman, 2021). Sin embargo, esta descomposición introduce una complejidad de red inherente: decenas o cientos de servicios autónomos, cada uno con sus propias direcciones IP, puertos, protocolos y esquemas de datos.
+</p>
+<p>
+Si los clientes externos (aplicaciones web SPA, dispositivos móviles nativos, sistemas de terceros) intentaran comunicarse directamente con cada microservicio individual, el sistema colapsaría bajo problemas severos de seguridad, acoplamiento extremo, sobrecarga de solicitudes de red y dificultades insalvables de gobernanza. Para abordar esta problemática estructural surge el patrón de <strong>API Gateway</strong>.
+</p>
+
+<h2>1. Definición de API Gateway y su Propósito</h2>
+<p>
+Un <strong>API Gateway</strong> es un componente de software arquitectónico que se sitúa como intermediario o punto de entrada único (<em>Single Entry Point</em>) entre los clientes externos y un conjunto de microservicios internos que componen una aplicación distribuida (Richardson, 2018).
+</p>
+<p>
+El propósito primordial del API Gateway es abstraer la topología y complejidad interna del ecosistema de microservicios, proporcionando a los consumidores una interfaz consolidada, uniforme, segura y optimizada. En términos conceptuales, actúa como el "director de orquesta" y la "frontera perimetral" de la plataforma.
+</p>
+
+<h2>2. Problemas que Resuelve y Diferencias con un Reverse Proxy Tradicional</h2>
+<p>
+Uno de los equívocos más frecuentes en ingeniería de software consiste en equiparar un API Gateway con un Reverse Proxy tradicional (como una instancia estándar de NGINX o HAProxy). Aunque ambos componentes interceptan y redirigen tráfico HTTP, operan en diferentes capas de abstracción y resuelven problemas con alcances totalmente distintos.
+</p>
+<div class="callout">
+  <strong>Diferencia Fundamental:</strong> Un reverse proxy tradicional se enfoca en la optimización del transporte de paquetes de red (capas 4 y 7 básica), entrega de archivos estáticos y balanceo de carga; un <strong>API Gateway</strong> opera en la capa de aplicación superior, orquestando lógica de composición, validación criptográfica de identidades (JWT/OAuth2), políticas de negocio y transformación de estructuras JSON.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Criterio</th>
+      <th>Reverse Proxy Tradicional (NGINX clásico)</th>
+      <th>API Gateway Moderno (Kong, Ocelot, YARP)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Capa Principal de Operación</strong></td>
+      <td>Capas 4 (Transporte) y 7 básica (HTTP estándar).</td>
+      <td>Capa 7 avanzada (Capa de Aplicación y Dominio Ligero).</td>
+    </tr>
+    <tr>
+      <td><strong>Enrutamiento</strong></td>
+      <td>Estático, mediante archivos planos de configuración.</td>
+      <td>Dinámico, reactivo a catálogos de Service Discovery (Consul, K8s).</td>
+    </tr>
+    <tr>
+      <td><strong>Composición y Agregación</strong></td>
+      <td>No disponible o compleja mediante scripts C/Lua.</td>
+      <td>Nativa: combina datos de múltiples microservicios en una sola respuesta.</td>
+    </tr>
+    <tr>
+      <td><strong>Seguridad de Aplicación</strong></td>
+      <td>Inspección TLS y listas de control de acceso IP.</td>
+      <td>Validación de JWT descentralizado, integración OIDC y claims.</td>
+    </tr>
+    <tr>
+      <td><strong>Transformación</strong></td>
+      <td>Reescritura simple de cabeceras.</td>
+      <td>Reescritura de cuerpos JSON, mutación de rutas y conversión de protocolos.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>3. Funciones Comunes del API Gateway</h2>
+<p>A continuación se detallan diez de las capacidades más determinantes que provee un API Gateway:</p>
+<ol>
+  <li><strong>Enrutamiento Dinámico y Proxy Inverso:</strong> Inspecciona el verbo HTTP y la URI entrante para redirigir la petición a la dirección interna y puerto del microservicio correspondiente.</li>
+  <li><strong>Autenticación y Autorización Centralizada:</strong> Valida firmas criptográficas de tokens JWT y rechaza peticiones no autenticadas en el perímetro antes de saturar la red interna.</li>
+  <li><strong>Limitación de Tasa (Rate Limiting y Throttling):</strong> Aplica algoritmos formales (Token Bucket / Leaky Bucket) para restringir el número de solicitudes por segundo por cliente o IP, previniendo ataques de denegación de servicio.</li>
+  <li><strong>Almacenamiento en Caché (Caching):</strong> Almacena temporalmente respuestas HTTP de lecturas frecuentes para servirlas de inmediato sin tocar los microservicios aguas abajo.</li>
+  <li><strong>Terminación SSL/TLS:</strong> Gestiona certificados y negociación HTTPS perimetral, permitiendo comunicación interna ligera y eficiente.</li>
+  <li><strong>Balanceo de Carga (Load Balancing):</strong> Reparte la carga entre instancias saludables de microservicios usando algoritmos como Round-Robin o Least Connections.</li>
+  <li><strong>Transformación de Peticiones y Respuestas:</strong> Inyecta cabeceras de trazabilidad (<code>X-Request-Id</code>), oculta cabeceras internas confidenciales y reescribe URLs para retrocompatibilidad.</li>
+  <li><strong>Agregación de Datos (BFF / API Composition):</strong> Realiza llamadas paralelas a múltiples servicios internos y fusiona los resultados en un solo JSON optimizado para el cliente.</li>
+  <li><strong>Observabilidad Centralizada:</strong> Genera identificadores de correlación distribuidos (Distributed Tracing), registros de auditoría y métricas de latencia de red.</li>
+  <li><strong>Resiliencia y Disyuntor (Circuit Breaking):</strong> Detecta caídas en microservicios downstream e interrumpe llamadas recursivas enviando respuestas de fallback controladas.</li>
+</ol>
+
+<h2>4. Ventajas y Desventajas</h2>
+<p><strong>Ventajas:</strong> Desacoplamiento total entre frontend y topología interna de servidores; centralización de seguridad; disminución drástica de peticiones en red móvil (chatty I/O); y gobernanza simplificada.</p>
+<p><strong>Desventajas y Riesgos:</strong></p>
+<ul>
+  <li><strong>Punto Único de Falla (SPOF):</strong> Una caída del Gateway inhabilita el acceso a toda la plataforma si no cuenta con alta disponibilidad.</li>
+  <li><strong>Latencia Adicional:</strong> El procesamiento perimetral y el salto de red adicional añaden milisegundos a la transacción.</li>
+  <li><strong>Riesgo de Acoplamiento (Antipatrón Monolito Oculto):</strong> Si los desarrolladores introducen lógica pesada de reglas de negocio en el Gateway, este degenera en un monolito difícil de mantener.</li>
+</ul>
+
+<h2>5. Patrones Arquitectónicos Relacionados</h2>
+<ul>
+  <li><strong>Backend for Frontend (BFF):</strong> Creación de gateways especializados por tipo de cliente (móvil, web SPA, terceros B2B), permitiendo formatos y contratos a la medida de cada pantalla.</li>
+  <li><strong>Patrón Higo Estrangulador (Strangler Fig):</strong> Estrategia para migrar monolitos hacia microservicios enrutando gradualmente funcionalidades al nuevo stack sin cortes de servicio.</li>
+  <li><strong>Composición de API (API Composition):</strong> Mecanismo para consolidar datos cuando se aplica el principio de base de datos aislada por servicio (Database-per-Service).</li>
+  <li><strong>Descubrimiento de Servicios (Service Discovery):</strong> Registro dinámico de instancias efímeras en entornos de contenedores elásticos (Kubernetes o Consul).</li>
+</ul>
+
+<h2>6. Comparativa de Herramientas de API Gateway</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Herramienta</th>
+      <th>Lenguaje / Stack</th>
+      <th>Tipo</th>
+      <th>Curva de Aprendizaje</th>
+      <th>Funciones Clave</th>
+      <th>Caso Ideal de Uso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Ocelot</strong></td>
+      <td>C# / .NET (ASP.NET Core)</td>
+      <td>Open-source</td>
+      <td>Baja para desarrolladores .NET</td>
+      <td>Configuración declarativa JSON, agregación nativa de endpoints, caché, autenticación JWT integrada y balanceo de carga.</td>
+      <td>Sistemas empresariales en .NET que buscan una solución ligera e integrada por middleware.</td>
+    </tr>
+    <tr>
+      <td><strong>Kong Gateway</strong></td>
+      <td>Lua / C / OpenResty (NGINX)</td>
+      <td>Open-source / Enterprise</td>
+      <td>Media</td>
+      <td>Rendimiento submilisegundo, catálogo masivo de plugins oficiales, arquitectura sin estado (DB-less mode) y mTLS.</td>
+      <td>Ecosistemas de alta concurrencia heterogéneos con cientos de miles de peticiones por segundo.</td>
+    </tr>
+    <tr>
+      <td><strong>YARP</strong></td>
+      <td>C# / .NET 8 y 9</td>
+      <td>Open-source (Microsoft)</td>
+      <td>Baja para desarrolladores .NET</td>
+      <td>Rendimiento de vanguardia, soporte nativo de HTTP/3, extensibilidad programática completa en C# y balanceo activo.</td>
+      <td>Sistemas modernos en .NET que requieren alto rendimiento y lógica personalizada en C#.</td>
+    </tr>
+    <tr>
+      <td><strong>NGINX</strong></td>
+      <td>C</td>
+      <td>Open-source / Commercial</td>
+      <td>Media a Alta</td>
+      <td>Rendimiento legendario, consumo mínimo de RAM, terminación SSL muy veloz y balanceo en capas 4 y 7.</td>
+      <td>Punto de entrada perimetral de infraestructura y balanceador general de clústeres.</td>
+    </tr>
+    <tr>
+      <td><strong>Traefik</strong></td>
+      <td>Go</td>
+      <td>Open-source / Commercial</td>
+      <td>Baja</td>
+      <td>Autodescubrimiento nativo con Docker y Kubernetes, certificados Let's Encrypt automáticos y dashboard web en vivo.</td>
+      <td>Entornos de contenedores y microservicios nativos en la nube sin configuración manual de rutas.</td>
+    </tr>
+    <tr>
+      <td><strong>Spring Cloud Gateway</strong></td>
+      <td>Java / Kotlin (Spring Boot)</td>
+      <td>Open-source</td>
+      <td>Media a Alta</td>
+      <td>Enrutamiento no bloqueante basado en Project Reactor, integración con Eureka, Spring Security y Resilience4j.</td>
+      <td>Corporaciones cuyo stack tecnológico principal reside en Java y el ecosistema Spring.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>7. Conclusiones y Recomendaciones</h2>
+<p>
+<strong>Cuándo usar un Gateway:</strong> Cuando el sistema cuenta con más de 3 microservicios, existen diversos canales de clientes (móvil, web, API pública), se requiere una frontera de seguridad homogénea y auditoría perimetral de tráfico.
+</p>
+<p>
+<strong>Cuándo evitarlo:</strong> En sistemas monolíticos consolidados, arquitecturas con 1 o 2 microservicios triviales donde la sobrecarga de mantenimiento supera los beneficios, o en sistemas con tolerancia cero a la latencia de red (como procesamiento de transacciones financieras de alta frecuencia - HFT).
+</p>
+
+<h2 class="references-title">Referencias Bibliográficas (APA 7ª Edición)</h2>
+<div class="references">
+  <p>Fowler, M. (2014). <em>Microservices: a definition of this new architectural term</em>. MartinFowler.com. https://martinfowler.com/articles/microservices.html</p>
+  <p>Fowler, M. (2020). <em>StranglerFigApplication</em>. MartinFowler.com. https://martinfowler.com/bliki/StranglerFigApplication.html</p>
+  <p>Kong Inc. (2023). <em>What is an API Gateway? Architecture, patterns, and best practices</em>. KongHQ Documentation. https://konghq.com/learning-center/api-gateway/what-is-an-api-gateway</p>
+  <p>Microsoft Corporation. (2024). <em>Diseño de arquitectura de microservicios: Implementación de API Gateways con YARP y Ocelot</em>. Microsoft Learn Architecture Center. https://learn.microsoft.com/es-es/azure/architecture/microservices/design/gateway</p>
+  <p>NGINX Inc. (2022). <em>Deploying NGINX as an API Gateway: Comprehensive architectural guide</em>. F5 Networks Technical Reports. https://www.nginx.com/blog/deploying-nginx-api-gateway/</p>
+  <p>Newman, S. (2021). <em>Building Microservices: Designing Fine-Grained Systems</em> (2nd ed.). O'Reilly Media.</p>
+  <p>Richardson, C. (2018). <em>Microservices Patterns: With examples in Java</em>. Manning Publications.</p>
+  <p>Richardson, C. (2022). <em>Pattern: API Gateway / Backends for Frontends</em>. Microservices.io. https://microservices.io/patterns/apigateway.html</p>
+  <p>Traefik Labs. (2024). <em>Traefik The Cloud Native Application Proxy: Architecture and core concepts</em>. Traefik Docs. https://doc.traefik.io/traefik/</p>
+</div>
+
+</body>
+</html>

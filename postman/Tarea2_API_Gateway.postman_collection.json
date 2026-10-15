@@ -1,0 +1,262 @@
+{
+  "info": {
+    "_postman_id": "cuc-tarea2-gateway-collection",
+    "name": "Tarea Corta 2 - API Gateway y Microservicios (CUC)",
+    "description": "Colección completa para pruebas funcionales de la Tarea 2 del curso Programación V del Colegio Universitario de Cartago.\nIncluye endpoints de Productos, Clientes, Órdenes y políticas del Gateway (Routing, Transformación de Headers y Agregación).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "producto_id",
+      "value": "6ad13a5e343dfefa3d5a6989",
+      "type": "string"
+    },
+    {
+      "key": "cliente_id",
+      "value": "6ad13a5e343dfefa3d5a698e",
+      "type": "string"
+    },
+    {
+      "key": "orden_id",
+      "value": "6ad13abdd31eace2d0746b81",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "00 - Gateway General",
+      "item": [
+        {
+          "name": "Gateway Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Verifica el estado del API Gateway y los microservicios aguas abajo configurados."
+          }
+        },
+        {
+          "name": "Gateway Dashboard (Política Agregación 2)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dashboard"]
+            },
+            "description": "Consulta simultáneamente los 3 microservicios para consolidar estadísticas en una sola llamada."
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 - Microservicio Productos",
+      "item": [
+        {
+          "name": "Listar todos los productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos"]
+            }
+          }
+        },
+        {
+          "name": "Obtener producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos/{{producto_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "{{producto_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Crear nuevo producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Auriculares Sony WH-1000XM5\",\n  \"descripcion\": \"Cancelación de ruido activa inalámbricos\",\n  \"precio\": 349,\n  \"stock\": 12,\n  \"categoria\": \"Audio\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar producto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"precio\": 320,\n  \"stock\": 10\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/productos/{{producto_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "{{producto_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Microservicio Clientes",
+      "item": [
+        {
+          "name": "Listar todos los clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            }
+          }
+        },
+        {
+          "name": "Obtener cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/{{cliente_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "{{cliente_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Registrar nuevo cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identificacion\": \"118880999\",\n  \"nombre\": \"Alejandro Vargas\",\n  \"correo\": \"alejandro.vargas@cuc.cr\",\n  \"telefono\": \"8765-4321\",\n  \"direccion\": \"San Rafael de Oreamuno\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Microservicio Órdenes (Inter-Servicio)",
+      "item": [
+        {
+          "name": "Listar todas las órdenes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/ordenes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ordenes"]
+            }
+          }
+        },
+        {
+          "name": "Crear orden (Validación Inter-servicio con Clientes y Productos)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": \"{{cliente_id}}\",\n  \"items\": [\n    {\n      \"productoId\": \"{{producto_id}}\",\n      \"cantidad\": 1\n    }\n  ],\n  \"notas\": \"Pedido generado para prueba de microservicios CUC\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ordenes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ordenes"]
+            },
+            "description": "Demuestra la comunicación inter-servicio: el servicio de órdenes valida cliente en clientes-service y descuenta stock en productos-service."
+          }
+        },
+        {
+          "name": "Actualizar estado de orden",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"PAGADA\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ordenes/{{orden_id}}/estado",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ordenes", "{{orden_id}}", "estado"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Políticas del Gateway (Agregación y Transformación)",
+      "item": [
+        {
+          "name": "Agregación: Resumen Orden Completa (BFF / API Composition)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/resumen-orden/{{orden_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resumen-orden", "{{orden_id}}"]
+            },
+            "description": "Endpoint clave del Gateway. Combina en una sola respuesta la Orden, el Cliente completo y el detalle de cada Producto con tiempos de ejecución."
+          }
+        }
+      ]
+    }
+  ]
+}

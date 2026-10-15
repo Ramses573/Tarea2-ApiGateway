@@ -1,0 +1,4 @@
+"Miembro del Equipo","Rol Principal","Módulo / Tarea Asignada","Porcentaje de Participación","Entregables Concretos"
+"Ramses Solano","Líder de Arquitectura y Backend","Diseño de Arquitectura, API Gateway y Microservicio de Órdenes","100%","Configuración del Gateway en puerto 8080, lógica de enrutamiento, transformación de headers, endpoint de agregación BFF, comunicación inter-servicio y persistencia NoSQL en MongoDB"
+"Ramses Solano","Investigador Técnico","Elaboración de Documento Teórico e Investigación","100%","Redacción del informe formal de 7 secciones en formato APA 7ma edición con fuentes bibliográficas y cuadro comparativo de herramientas"
+"Ramses Solano","Control de Calidad y Pruebas","Colección de Pruebas Postman y Documentación","100%","Creación de la suite de pruebas funcionales en Postman, script seed.js de datos y guía paso a paso para grabación del video demostrativo"

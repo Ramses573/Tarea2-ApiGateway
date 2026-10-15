@@ -1,0 +1,30 @@
+{
+  "name": "tarea2-api-gateway",
+  "version": "1.0.0",
+  "description": "Tarea Corta 2 - Arquitectura de Microservicios con API Gateway y Persistencia NoSQL (MongoDB) - Programación V CUC",
+  "main": "gateway/server.js",
+  "scripts": {
+    "install:all": "npm install && cd gateway && npm install && cd ../services/productos-service && npm install && cd ../clientes-service && npm install && cd ../ordenes-service && npm install && cd ../..",
+    "seed": "node seed.js",
+    "start:gateway": "node gateway/server.js",
+    "start:productos": "node services/productos-service/server.js",
+    "start:clientes": "node services/clientes-service/server.js",
+    "start:ordenes": "node services/ordenes-service/server.js",
+    "dev": "concurrently --kill-others -n \"GATEWAY,PRODUCTOS,CLIENTES,ORDENES\" -c \"cyan.bold,green.bold,yellow.bold,magenta.bold\" \"npm run start:gateway\" \"npm run start:productos\" \"npm run start:clientes\" \"npm run start:ordenes\"",
+    "start": "npm run dev"
+  },
+  "keywords": [
+    "microservices",
+    "api-gateway",
+    "mongodb",
+    "nosql",
+    "cuc",
+    "programacion-v"
+  ],
+  "author": "Ramses",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "mongoose": "^8.9.5"
+  }
+}
