@@ -11,7 +11,9 @@
     "start:clientes": "node services/clientes-service/server.js",
     "start:ordenes": "node services/ordenes-service/server.js",
     "dev": "concurrently --kill-others -n \"GATEWAY,PRODUCTOS,CLIENTES,ORDENES\" -c \"cyan.bold,green.bold,yellow.bold,magenta.bold\" \"npm run start:gateway\" \"npm run start:productos\" \"npm run start:clientes\" \"npm run start:ordenes\"",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "test": "node --test services/ordenes-service/test/ordenes.test.js gateway/test/gateway.test.js",
+    "docs:matriz": "node tools/build_beautiful_excel.js"
   },
   "keywords": [
     "microservices",
@@ -25,8 +27,10 @@
   "license": "ISC",
   "dependencies": {
     "concurrently": "^9.1.2",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
     "exceljs": "^4.4.0",
-    "mongoose": "^8.9.5",
     "xlsx": "^0.18.5"
   }
 }

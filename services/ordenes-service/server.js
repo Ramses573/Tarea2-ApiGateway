@@ -1,13 +1,12 @@
-require('dotenv').config();
+const config = require('./src/config');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const ordenRoutes = require('./src/routes/ordenRoutes');
 
+const { PORT, MONGODB_URI, SERVICE_NAME } = config;
+
 const app = express();
-const PORT = process.env.PORT || 5003;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/cuc_ordenes_db';
-const SERVICE_NAME = process.env.SERVICE_NAME || 'Ordenes-Service';
 
 // Middlewares globales
 app.use(cors());
@@ -29,11 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas
-app.use('/ordenes', ordenRoutes);
-app.use('/', ordenRoutes);
-
-// Health check
+// Health check (antes de las rutas de recurso)
 app.get('/health', (req, res) => {
   res.status(200).json({
     servicio: SERVICE_NAME,
@@ -42,6 +37,9 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+// Rutas. El gateway reescribe /api/ordenes -> /ordenes.
+app.use('/ordenes', ordenRoutes);
 
 // Manejo de rutas inexistentes
 app.use((req, res) => {
@@ -52,15 +50,19 @@ app.use((req, res) => {
 });
 
 // Conexión a MongoDB y arranque del servidor
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
-    console.log(`[${SERVICE_NAME}] Conectado exitosamente a MongoDB (${MONGODB_URI})`);
-    app.listen(PORT, () => {
-      console.log(`[${SERVICE_NAME}] Microservicio corriendo en http://localhost:${PORT}`);
+if (require.main === module) {
+  mongoose
+    .connect(MONGODB_URI)
+    .then(() => {
+      console.log(`[${SERVICE_NAME}] Conectado exitosamente a MongoDB (${MONGODB_URI})`);
+      app.listen(PORT, () => {
+        console.log(`[${SERVICE_NAME}] Microservicio corriendo en http://localhost:${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error(`[${SERVICE_NAME}] Error al conectar con MongoDB:`, err.message);
+      process.exit(1);
     });
-  })
-  .catch((err) => {
-    console.error(`[${SERVICE_NAME}] Error al conectar con MongoDB:`, err.message);
-    process.exit(1);
-  });
+}
+
+module.exports = app;

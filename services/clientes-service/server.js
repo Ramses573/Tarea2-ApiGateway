@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -29,11 +30,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas
-app.use('/clientes', clienteRoutes);
-app.use('/', clienteRoutes);
-
-// Health check
+// Health check (antes de las rutas de recurso para no ser capturado por /:id)
 app.get('/health', (req, res) => {
   res.status(200).json({
     servicio: SERVICE_NAME,
@@ -42,6 +39,9 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+// Rutas. El gateway reescribe /api/clientes -> /clientes.
+app.use('/clientes', clienteRoutes);
 
 // Manejo de rutas inexistentes
 app.use((req, res) => {

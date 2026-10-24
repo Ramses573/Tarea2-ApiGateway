@@ -90,24 +90,24 @@ async function seed() {
     },
     {
       identificacion: '207770666',
-      nombre: 'Héctor Román Arrieta',
-      correo: 'hector.roman@est.cuc.cr',
+      nombre: 'Cliente de Prueba 3',
+      correo: 'cliente3@ejemplo.com',
       telefono: '6044-5566',
       direccion: 'Curridabat, San José',
       activo: true
     },
     {
       identificacion: '304440333',
-      nombre: 'Fabián Espinoza Méndez',
-      correo: 'fabian.espinoza@est.cuc.cr',
+      nombre: 'Cliente de Prueba 4',
+      correo: 'cliente4@ejemplo.com',
       telefono: '8765-4321',
       direccion: 'Paraíso, Cartago',
       activo: true
     },
     {
       identificacion: '108880777',
-      nombre: 'Alejandro Morales',
-      correo: 'alejandro.morales@est.cuc.cr',
+      nombre: 'Cliente de Prueba 5',
+      correo: 'cliente5@ejemplo.com',
       telefono: '8912-3456',
       direccion: 'Oreamuno, Cartago',
       activo: true

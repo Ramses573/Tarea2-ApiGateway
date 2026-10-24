@@ -72,7 +72,7 @@ async function createBeautifulExcel() {
   // 3. DATOS DE LOS 5 INTEGRANTES
   const teamMembers = [
     {
-      miembro: 'Héctor Román Arrieta',
+      miembro: '[Nombre omitido]',
       rol: 'Backend Developer',
       modulo: 'Microservicio de Productos / Catálogo',
       porcentaje: '20%',
@@ -86,14 +86,14 @@ async function createBeautifulExcel() {
       entregables: 'Diseño del Gateway en puerto 8080, middleware de enrutamiento perimetral, política de transformación de cabeceras (X-Gateway, X-Request-Id), observabilidad y logging estructurado.'
     },
     {
-      miembro: 'Alejandro Morales',
+      miembro: '[Nombre omitido]',
       rol: 'Backend & Documentación',
       modulo: 'Microservicio de Clientes e Investigación',
       porcentaje: '20%',
       entregables: 'Desarrollo de API REST en puerto 5002, modelo NoSQL en MongoDB (cuc_clientes_db), scripts de seed de datos y redacción formal del informe teórico en formato APA 7ma edición.'
     },
     {
-      miembro: 'Fabián Espinoza Méndez',
+      miembro: '[Nombre omitido]',
       rol: 'Backend Developer',
       modulo: 'Microservicio de Órdenes e Inter-Servicio',
       porcentaje: '20%',
@@ -213,14 +213,14 @@ async function createBeautifulExcel() {
   worksheet.getRow(rowIndex).height = 20;
 
   // Guardar archivo
-  const outputPath = path.join(__dirname, 'docs', 'Matriz_Responsabilidades.xlsx');
+  const outputPath = path.join(__dirname, '..', 'docs', 'Matriz_Responsabilidades.xlsx');
   
   try {
     await workbook.xlsx.writeFile(outputPath);
     console.log(`🎉 Archivo Excel estilizado generado exitosamente en: ${outputPath}`);
   } catch (err) {
     if (err.code === 'EBUSY') {
-      const altPath = path.join(__dirname, 'docs', 'Matriz_Responsabilidades_Diseno.xlsx');
+      const altPath = path.join(__dirname, '..', 'docs', 'Matriz_Responsabilidades_Diseno.xlsx');
       await workbook.xlsx.writeFile(altPath);
       console.log(`⚠️ Archivo original bloqueado por Excel. Guardado como versión diseñada en: ${altPath}`);
     } else {

@@ -8,11 +8,9 @@
 
 **Profesor:** Prof. Ing. Gabriel González Solano  
 **Integrantes del Equipo:**  
-- Héctor Román Arrieta  
 - Ramsés Aguilar Monge  
-- Alejandro Morales  
-- Fabián Espinoza Méndez  
 - José Rodolfo Morales Calderón  
+**Repositorio:** https://github.com/Ramses573/Tarea2-ApiGateway  
 **Fecha de Entrega:** 15 de Octubre de 2026  
 **Periodo Académico:** III Cuatrimestre 2026  
 
@@ -209,9 +207,9 @@ De acuerdo con los lineamientos de la rúbrica del curso, a continuación se det
 |---|---|---|:---:|---|
 | **Ramsés Aguilar Monge** | Líder Técnico & Arquitectura | API Gateway Centralizado y Enrutamiento | **20%** | Diseño del Gateway en puerto 8080, middleware de enrutamiento perimetral, transformación de cabeceras (`X-Gateway`, `X-Request-Id`) y logging de observabilidad. |
 | **José Rodolfo Morales Calderón** | Backend & Integración | Política de Agregación y Pruebas Postman | **20%** | Implementación del endpoint de agregación BFF (`/api/resumen-orden/:id`), agregación de dashboard general (`/api/dashboard`) y suite completa en Postman v2.1. |
-| **Fabián Espinoza Méndez** | Backend Developer | Microservicio de Órdenes e Inter-Servicio | **20%** | API REST en puerto 5003, modelo NoSQL en MongoDB (`cuc_ordenes_db`), comunicación inter-servicio con Productos y Clientes para validación de stock y precios. |
-| **Héctor Román Arrieta** | Backend Developer | Microservicio de Productos / Catálogo | **20%** | API REST en puerto 5001, modelo NoSQL en MongoDB (`cuc_productos_db`), endpoints CRUD, lógica de inventario y endpoint de descuento de stock. |
-| **Alejandro Morales** | Backend & Documentación | Microservicio de Clientes e Investigación Teórica | **20%** | API REST en puerto 5002, modelo NoSQL en MongoDB (`cuc_clientes_db`), script de seed de datos y redacción formal del informe teórico en formato APA. |
+| **[Nombre omitido]** | Backend Developer | Microservicio de Órdenes e Inter-Servicio | **20%** | API REST en puerto 5003, modelo NoSQL en MongoDB (`cuc_ordenes_db`), comunicación inter-servicio con Productos y Clientes para validación de stock y precios. |
+| **[Nombre omitido]** | Backend Developer | Microservicio de Productos / Catálogo | **20%** | API REST en puerto 5001, modelo NoSQL en MongoDB (`cuc_productos_db`), endpoints CRUD, lógica de inventario y endpoint de descuento de stock. |
+| **[Nombre omitido]** | Backend & Documentación | Microservicio de Clientes e Investigación Teórica | **20%** | API REST en puerto 5002, modelo NoSQL en MongoDB (`cuc_clientes_db`), script de seed de datos y redacción formal del informe teórico en formato APA. |
 | **TOTAL PARTICIPACIÓN** | | | **100%** | |
 
 ---

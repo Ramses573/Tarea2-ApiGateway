@@ -1,10 +1,19 @@
 const express = require('express');
 const axios = require('axios');
+const { GATEWAY_NAME, PRODUCTOS_SERVICE_URL, CLIENTES_SERVICE_URL, ORDENES_SERVICE_URL } = require('../config');
+
 const router = express.Router();
 
-const PRODUCTOS_SERVICE_URL = process.env.PRODUCTOS_SERVICE_URL || 'http://localhost:5001';
-const CLIENTES_SERVICE_URL = process.env.CLIENTES_SERVICE_URL || 'http://localhost:5002';
-const ORDENES_SERVICE_URL = process.env.ORDENES_SERVICE_URL || 'http://localhost:5003';
+// Un ID con formato inválido es un error del cliente (400)
+router.param('id', (req, res, next, id) => {
+  if (!/^[a-fA-F0-9]{24}$/.test(id)) {
+    return res.status(400).json({
+      gateway: GATEWAY_NAME,
+      mensaje: `El ID '${id}' no tiene un formato válido`
+    });
+  }
+  next();
+});
 
 /**
  * POLÍTICA DE AGREGACIÓN #1:
@@ -21,12 +30,12 @@ router.get('/resumen-orden/:id', async (req, res) => {
     let respOrden;
     try {
       respOrden = await axios.get(`${ORDENES_SERVICE_URL}/ordenes/${id}`, {
-        headers: { 'X-Gateway': 'CUC-API-Gateway', 'X-Request-Id': req.id || 'agg-req' }
+        headers: { 'X-Gateway': GATEWAY_NAME, 'X-Request-Id': req.id || 'agg-req' }
       });
     } catch (err) {
       if (err.response && err.response.status === 404) {
         return res.status(404).json({
-          gateway: 'CUC-API-Gateway',
+          gateway: GATEWAY_NAME,
           mensaje: `No se encontró la orden con ID: ${id}`
         });
       }
@@ -35,10 +44,11 @@ router.get('/resumen-orden/:id', async (req, res) => {
 
     const orden = respOrden.data.datos;
 
-    // 2. Consultar en paralelo los datos del cliente y los productos
+    // 2. Consultar en paralelo los datos del cliente y los productos.
+    // Si un servicio falla, la agregación responde con datos parciales en vez de fallar completa.
     const clientePromise = axios
       .get(`${CLIENTES_SERVICE_URL}/clientes/${orden.clienteId}`, {
-        headers: { 'X-Gateway': 'CUC-API-Gateway' }
+        headers: { 'X-Gateway': GATEWAY_NAME }
       })
       .then((r) => r.data.datos)
       .catch((err) => ({
@@ -49,7 +59,7 @@ router.get('/resumen-orden/:id', async (req, res) => {
     const productosPromises = orden.items.map((item) =>
       axios
         .get(`${PRODUCTOS_SERVICE_URL}/productos/${item.productoId}`, {
-          headers: { 'X-Gateway': 'CUC-API-Gateway' }
+          headers: { 'X-Gateway': GATEWAY_NAME }
         })
         .then((r) => ({
           productoId: item.productoId,
@@ -79,7 +89,7 @@ router.get('/resumen-orden/:id', async (req, res) => {
     // 3. Devolver la respuesta agregada compuesta
     res.status(200).json({
       politicaGateway: 'Agregación / API Composition',
-      agregadoPor: 'CUC-API-Gateway',
+      agregadoPor: GATEWAY_NAME,
       tiempoEjecucionMs: duracion,
       ordenId: orden._id,
       fechaCreacion: orden.createdAt,
@@ -90,13 +100,13 @@ router.get('/resumen-orden/:id', async (req, res) => {
       items: itemsEnriquecidos,
       resumenServicios: {
         ordenes: 'UP',
-        clientes: 'UP',
-        productos: 'UP'
+        clientes: cliente.error ? 'DEGRADADO' : 'UP',
+        productos: itemsEnriquecidos.some((i) => i.nombre === 'Desconocido') ? 'DEGRADADO' : 'UP'
       }
     });
   } catch (error) {
     res.status(502).json({
-      gateway: 'CUC-API-Gateway',
+      gateway: GATEWAY_NAME,
       mensaje: 'Fallo al agregar datos de los microservicios aguas abajo',
       error: error.message
     });
@@ -119,28 +129,23 @@ router.get('/dashboard', async (req, res) => {
     ]);
 
     const duracion = Date.now() - inicio;
+    const resumen = (resultado) => ({
+      estado: resultado.status === 'fulfilled' ? 'UP' : 'DOWN',
+      totalRegistros: resultado.status === 'fulfilled' ? resultado.value.data.total : 0
+    });
 
     res.status(200).json({
       politicaGateway: 'Agregación / Dashboard BFF',
       tiempoEjecucionMs: duracion,
       servicios: {
-        productos: {
-          estado: prodRes.status === 'fulfilled' ? 'UP' : 'DOWN',
-          totalRegistros: prodRes.status === 'fulfilled' ? prodRes.value.data.total : 0
-        },
-        clientes: {
-          estado: cliRes.status === 'fulfilled' ? 'UP' : 'DOWN',
-          totalRegistros: cliRes.status === 'fulfilled' ? cliRes.value.data.total : 0
-        },
-        ordenes: {
-          estado: ordRes.status === 'fulfilled' ? 'UP' : 'DOWN',
-          totalRegistros: ordRes.status === 'fulfilled' ? ordRes.value.data.total : 0
-        }
+        productos: resumen(prodRes),
+        clientes: resumen(cliRes),
+        ordenes: resumen(ordRes)
       }
     });
   } catch (error) {
     res.status(500).json({
-      gateway: 'CUC-API-Gateway',
+      gateway: GATEWAY_NAME,
       mensaje: 'Error al generar agregación de dashboard',
       error: error.message
     });

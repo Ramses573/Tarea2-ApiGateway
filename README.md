@@ -46,6 +46,25 @@ También se puede iniciar la solución con `Iniciar_Todo.bat` en Windows.
 
 `npm start` levanta simultáneamente el Gateway y los tres microservicios. Los registros de consola muestran el método, la ruta, el identificador de solicitud, el código HTTP y el tiempo de respuesta.
 
+## Configuración
+
+Cada servicio lee su propio archivo `.env` (en su carpeta). Las plantillas están en `.env.example`:
+
+- `gateway/.env.example`
+- `services/productos-service/.env.example`
+- `services/clientes-service/.env.example`
+- `services/ordenes-service/.env.example`
+
+Si no existe `.env`, se usan los valores por defecto (localhost y los puertos de la tabla de arquitectura).
+
+## Pruebas automatizadas
+
+```bash
+npm test
+```
+
+Las pruebas no requieren MongoDB ni los microservicios activos: el modelo y las llamadas inter-servicio se simulan. Cubren la reserva y compensación de stock, las reglas de cancelación, la validación de IDs y el comportamiento del gateway cuando un servicio está caído.
+
 ## Endpoints principales
 
 ### Gateway
@@ -66,6 +85,8 @@ También se puede iniciar la solución con `Iniciar_Todo.bat` en Windows.
 | `PUT` | `/api/productos/:id` |
 | `DELETE` | `/api/productos/:id` |
 
+`PATCH /productos/:id/descontar-stock` y `PATCH /productos/:id/reponer-stock` son internos: los usa el servicio de Órdenes para reservar y devolver stock.
+
 ### Clientes
 
 | Método | Ruta |
@@ -83,8 +104,14 @@ También se puede iniciar la solución con `Iniciar_Todo.bat` en Windows.
 | `GET` | `/api/ordenes` | Lista las órdenes |
 | `GET` | `/api/ordenes/:id` | Consulta una orden |
 | `POST` | `/api/ordenes` | Valida cliente y productos antes de crear la orden |
-| `PUT` | `/api/ordenes/:id/estado` | Actualiza el estado |
-| `DELETE` | `/api/ordenes/:id` | Cancela una orden |
+| `PUT` | `/api/ordenes/:id/estado` | Actualiza el estado (`PENDIENTE`, `PAGADA`, `ENVIADA`). No admite `CANCELADA` |
+| `DELETE` | `/api/ordenes/:id` | Cancela la orden y devuelve el stock. Solo aplica a órdenes `PENDIENTE` o `PAGADA` |
+
+Reglas de inventario:
+
+- Al crear una orden se valida el stock de todos los productos antes de descontar. Si una reserva falla, las ya descontadas se devuelven.
+- Si no se puede guardar la orden, se devuelve todo el stock reservado.
+- Los IDs con formato inválido responden `400`.
 
 ## Políticas implementadas
 
@@ -130,6 +157,7 @@ Tarea2-ApiGateway/
 │   └── ordenes-service/
 ├── postman/                    # Colección de pruebas
 ├── docs/                       # Documentos y evidencias
+├── tools/                      # Generador de la matriz de responsabilidades (Excel)
 ├── seed.js                     # Datos iniciales para MongoDB
 ├── package.json                # Scripts generales
 └── README.md
@@ -137,8 +165,5 @@ Tarea2-ApiGateway/
 
 ## Integrantes
 
-- Héctor Román Arrieta
 - Ramsés Aguilar Monge
-- Alejandro Morales
-- Fabián Espinoza Méndez
 - José Rodolfo Morales Calderón
